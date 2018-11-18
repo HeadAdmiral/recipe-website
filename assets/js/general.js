@@ -1,6 +1,4 @@
-window.onload = function() {
-  startApp();  
-}
+
 
 function startApp() {
   Vue.use(VueMaterial.default)
