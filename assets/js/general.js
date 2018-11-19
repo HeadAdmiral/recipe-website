@@ -5,7 +5,7 @@ function startApp() {
 
   new Vue({
     el: '#app',
-    components: { App },
+    components: { App.vue },
     template: '<App/>'
   })
 }
