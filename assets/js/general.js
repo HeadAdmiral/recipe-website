@@ -1,8 +1,10 @@
 //import VueMaterial from '/recipe-website/vue-material/dist/vue-material.js'
 
 function startApp() {
-  Vue.use(VueMaterial)
+  Vue.use(VueMaterial);
 
+  Vue.component('md-button', {}, });
+  
   new Vue({
     el: '#app'
   })
