@@ -1,5 +1,4 @@
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import VueMaterial from '/recipe-website/vue-material/dist/vue-material.js'
 
 function startApp() {
   Vue.use(VueMaterial)
