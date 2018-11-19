@@ -2,8 +2,6 @@
 
 function startApp() {
   Vue.use(VueMaterial);
-
-  Vue.component('md-button', {}, );
   
   new Vue({
     el: '#app'
