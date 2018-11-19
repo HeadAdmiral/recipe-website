@@ -4,8 +4,7 @@ function startApp() {
   Vue.use(VueMaterial)
 
   new Vue({
-    el: '#app',
-    template: '<App/>'
+    el: '#app'
   })
 }
 
