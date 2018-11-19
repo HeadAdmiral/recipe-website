@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <!--<link rel="shortcut icon" href="/IMS/assets/img/favicon.ico">-->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/IMS/assets/js/general.js"></script>
+    <script src="/recipe-website/assets/js/general.js"></script>
+    <script src="/recipe-website/assets/js/home.js"></script>
   </head>
   <body>
 
@@ -22,7 +26,11 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-
+      <body>
+        <div id="app"></div>
+        <script src="https://unpkg.com/vue" defer></script>
+        <script src="https://unpkg.com/vue-material@beta"></script>
+      </body>
     </main>
 
     {% if site.google_analytics %}
