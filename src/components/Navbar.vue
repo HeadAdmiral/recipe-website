@@ -1,7 +1,7 @@
 <template>
     <nav>
         <v-toolbar app absolute clipped-left class="primary">
-            <v-toolbar-side-icon class="grey--text" @click="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-side-icon style="color: #424242" @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>
                 <span class="mr-5">{{ this.$route.name }}</span>
             </v-toolbar-title>
@@ -10,7 +10,7 @@
                     flat
                     hide-details
                     label="Search"
-                    prepend-inner-icon=""
+                    prepend-inner-icon="search"
                     @keyup.enter="query()"
                     id="search"
             ></v-text-field>
