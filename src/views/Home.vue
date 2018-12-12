@@ -76,7 +76,7 @@
       },
       methods: {
           view: function(id) {
-              this.$router.push('recipe' + '?id=' + id);
+              this.$router.push('recipe' + '/' + id);
           }
       }
   }

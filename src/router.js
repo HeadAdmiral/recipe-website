@@ -34,7 +34,7 @@ export default new Router({
             component: Search
         },
         {
-            path: '/recipe',
+            path: '/recipe/:id',
             name: 'Recipe',
             component: Recipe
         }

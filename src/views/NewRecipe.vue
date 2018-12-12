@@ -1,12 +1,146 @@
 <template>
-    <div>
-        <h1>New Project!</h1>
-    </div>
+    <v-layout align-center justify-center column fill-height>
+        <v-flex my-3>
+            <v-card width="1250">
+                <v-img :src=img aspect-ratio="2.75" v-model="img"></v-img>
+                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-tabs
+                        v-model="active"
+                        color="teal"
+                        dark
+                        slider-color="yellow"
+                >
+                    <v-tab
+                            v-for="n in ['Summary', 'Ingredients', 'Directions']"
+                            :key="n"
+                            ripple
+                    >
+                        {{ n }}
+                    </v-tab>
+
+
+                    <v-tab-item>
+                        <v-card flat>
+                                <v-card-title primary-title>
+                                    <v-text-field
+                                            placeholder="Title"
+                                            solo
+                                            full-width
+                                            @input="getIMG"
+                                            v-model="title"
+                                            autofocus
+                                            :rules="titleRules"
+                                            required
+                                    ></v-text-field>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-textarea
+                                            solo
+                                            counter="1000"
+                                            placeholder="Summary"
+                                            v-model="summary"
+                                            :rules="summaryRules"
+                                            required
+                                    ></v-textarea>
+                                </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+                                <v-card-text>
+                                    <v-textarea
+                                            solo
+                                            counter="1000"
+                                            placeholder="Ingredients"
+                                            v-model="ingredients"
+                                            :rules="ingredientsRules"
+                                            required
+                                    ></v-textarea>
+                                </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item>
+                        <v-card flat>
+
+                                <v-card-text>
+                                    <v-textarea
+                                            solo
+                                            counter="1000"
+                                            placeholder="Directions"
+                                            v-model="directions"
+                                            :rules="directionsRules"
+                                            required
+                                    ></v-textarea>
+                                </v-card-text>
+                        </v-card>
+                    </v-tab-item>
+                </v-tabs>
+                </v-form>
+                <v-card-actions>
+                    <v-btn flat color='accent' @click='submit'>Save</v-btn>
+                    <v-btn flat @click=''>Cancel</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
+    import VTabsSlider from "vuetify/lib/components/VTabs/VTabsSlider";
+
     export default {
-        name: "NewProject"
+        components: {VTabsSlider},
+        data: () => ({
+            valid: true,
+            active: null,
+            img: '',
+            title: '',
+            titleRules: [
+                v => !!v || 'Title is Required'
+            ],
+            summary: '',
+            summaryRules: [
+                v => !!v || 'Summary is Required'
+            ],
+            ingredients: '',
+            ingredientsRules: [
+                v => !!v || 'Ingredients are Required'
+            ],
+            directions: '',
+            directionsRules: [
+                v => !!v || 'Directions are Required'
+            ],
+            tabNames: ['summary', 'ingredients', 'directions']
+        }),
+
+        methods: {
+            getIMG(val) {
+                if (val !== "") {
+                    this.img = "https://source.unsplash.com/1600x900/?" + val;
+                }
+            },
+            submit: function () {
+                if (this.$refs.form.validate()) {
+                    database.collection('recipes').add({
+                        title: this.title,
+                        summary: this.summary,
+                        ingredients: this.ingredients,
+                        directions: this.directions
+                    })
+                        .then(function (docRef) {
+                            console.log('Document written with ID: ', docRef.id);
+                        })
+                        .catch(function (error) {
+                            console.error('Error adding document: ', error);
+                            alert('An error has occurred while attempting to save to the database.')
+                        });
+                    this.clear();
+                }
+            },
+            clear: function () {
+                this.$refs.form.reset();
+            }
+        }
     }
 </script>
 
