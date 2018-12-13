@@ -4,26 +4,31 @@
       <div v-for="recipe in recipes" :key="recipe.id">
         <v-flex my-3>
           <v-card width="1000" hover>
-            <v-img :src="recipe.src" aspect-ratio="2.75" :position=recipe.position></v-img>
-            <v-card-title primary-title>
-              <div>
-                <h3 class="headline mb-0">{{ recipe.title }}</h3>
-                <span>{{ recipe.desc }}</span>
-              </div>
-            </v-card-title>
+            <v-img :src=getIMG(recipe.title) aspect-ratio="2.75" :position=recipe.position></v-img>
+            <v-card flat>
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0">{{ recipe.title }}</h3>
+                </div>
+              </v-card-title>
+              <v-card-text>{{ recipe.summary }}</v-card-text>
+            </v-card>
             <v-card-actions>
               <v-btn flat @click=''>Share</v-btn>
               <v-btn flat @click="view(recipe.id)" color="accent">View</v-btn>
               <v-spacer></v-spacer>
-              <div class="text-xs-center">
+              <span class="grey--text text--darken-2 caption mr-2" id="rating">({{ rating }})</span>
+              <div class="text-xs-center" @click.prevent>
                 <v-rating
-                        v-model="recipe.rating"
+                        v-model="rating"
                         color="yellow darken-3"
                         background-color="grey darken-1"
                         empty-icon="$vuetify.icons.ratingFull"
                         half-increments
                         small
                         hover
+                        :click="updateRating(recipe.id, rating, recipe.ratingCount, recipe.ratingScore)"
+                        :created.once="setRating(recipe.rating)"
                 ></v-rating>
               </div>
             </v-card-actions>
@@ -38,32 +43,13 @@
 </template>
 
 <script>
-
+  import database from '@/components/firebaseInit.js'
   export default {
       data() {
-          let recipes = [
-              { title: 'Commission Calculator',
-                  desc: 'Estimates hourly wage for commission-based employees using user-provided sales information.',
-                  src: require('@/img/commission-calculator.jpg'),
-                  position: 'center center',
-                  repo: 'https://github.com/HeadAdmiral/Commission-Calculator',
-                  url: 'https://amastin-microcenter.github.io/Commission-Calculator/',
-                  id: 1,
-                  rating: 3.5
-              },
-
-              { title: 'Customer Queue',
-                  desc: 'Professional customer-facing utility meant for queueing customers when a salesperson is not currently available.',
-                  src: require('@/img/customer-queue.jpg'),
-                  position: 'center top',
-                  repo: 'https://github.com/HeadAdmiral/Customer-Queue',
-                  url: 'https://amastin-microcenter.github.io/Customer-Queue/',
-                  id: 2,
-                  rating: 2
-              }
-          ];
+          let recipes = this.getProjects();
           return {
               recipes,
+              rating: 0,
               opts: {
                   timeout: 3000,
                   chain: '38-38-40-40-37-39-37-39-66-65'
@@ -77,6 +63,56 @@
       methods: {
           view: function(id) {
               this.$router.push('recipe' + '/' + id);
+          },
+          getProjects: function() {
+              let docs = [];
+              // Query database for projects collection
+              database.collection('recipes').get()
+                  .then(function(querySnapshot) {
+                      querySnapshot.forEach(function(doc) {
+                          // Update the stored ID to match the document's ID
+                          docs.push(doc.data())
+                      });
+                  });
+              return docs;
+          },
+          getIMG(val) {
+              if (val !== "") {
+                  return "https://source.unsplash.com/1600x900/?" + val;
+              }
+          },
+          updateRating(id, rating, count, score) {
+              console.log("=====");
+              console.log(id);
+              console.log("Current Rating: " + rating);
+              console.log("Current Count: " + count);
+              console.log("Current Score: " + score);
+              console.log("-----");
+              // If the id is loaded update the recipe rating
+              if (id && rating !== 0) {
+                  count += 1;
+                  score = score + rating;
+                  console.log("New Count: " + count);
+                  console.log("New Score: " + score);
+                  rating = Number((score / count).toPrecision(3));
+                  console.log("New rating: " + rating);
+                  console.log("=====");
+                  database.collection('recipes').doc(id).set({
+                      rating: rating,
+                      ratingCount: count,
+                      ratingScore: score
+                  }, { merge: true }).then(function () {
+                      document.getElementById("rating").innerText = '(' + rating +')';
+                      console.log('Rating successfully updated.');
+                  })
+                      .catch(function (error) {
+                          console.error('Error adding document: ', error);
+                          alert('An error has occurred while attempting to update the rating for document ' + id + '.')
+                      });
+              }
+          },
+          setRating(rating) {
+              this.rating = rating;
           }
       }
   }

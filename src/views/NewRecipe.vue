@@ -122,15 +122,20 @@
                 }
             },
             submit: function () {
+                let docID = this.getID();
                 if (this.$refs.form.validate()) {
-                    database.collection('recipes').add({
+                    database.collection('recipes').doc(docID).set({
                         title: this.title,
                         summary: this.summary,
                         ingredients: this.ingredients,
-                        directions: this.directions
+                        directions: this.directions,
+                        id: docID,
+                        ratingScore: 0,
+                        ratingCount: 0,
+                        rating: 0,
                     })
-                        .then(function (docRef) {
-                            console.log('Document written with ID: ', docRef.id);
+                        .then(function() {
+                            console.log('Document successfully written');
                         })
                         .catch(function (error) {
                             console.error('Error adding document: ', error);
@@ -141,6 +146,9 @@
             },
             clear: function () {
                 this.$refs.form.reset();
+            },
+            getID: function() {
+                return String(new Date().getTime())
             }
         }
     }
