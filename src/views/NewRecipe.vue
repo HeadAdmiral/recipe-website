@@ -86,7 +86,9 @@
 </template>
 
 <script>
+    import database from '@/components/firebaseInit.js'
     import VTabsSlider from "vuetify/lib/components/VTabs/VTabsSlider";
+
 
     export default {
         components: {VTabsSlider},
