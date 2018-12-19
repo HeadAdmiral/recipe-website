@@ -133,6 +133,12 @@
                         ratingScore: 0,
                         ratingCount: 0,
                         rating: 0,
+                        comments: [
+                            {
+                                user: 'John Doe',
+                                comment: 'Hello World!'
+                            }
+                        ]
                     })
                         .then(function() {
                             console.log('Document successfully written');

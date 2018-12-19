@@ -63,11 +63,13 @@
                                 </v-card-title>
                                 <v-card-text>
                                     <v-text-field
+                                            v-model="username"
                                             label="Username"
                                             color="secondary"
                                             counter="20"
                                     ></v-text-field>
                                     <v-text-field
+                                            v-model="comment"
                                             label="Comment"
                                             color="secondary"
                                             counter="140"
@@ -77,7 +79,7 @@
                                 <v-divider></v-divider>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn color="accent" flat @click="dialog = false">
+                                    <v-btn color="accent" flat @click="dialog = false, addComment(r, username, comment)">
                                         Submit
                                     </v-btn>
                                     <v-btn flat @click="dialog = false">
@@ -110,48 +112,26 @@
                         <div slot="header">Comments</div>
                         <v-divider></v-divider>
 
-                        <v-layout align-center row spacer>
-                            <v-flex xs4 sm2 md1>
-                                <v-avatar>
-                                    <v-icon class="ml-4" size="40">account_circle</v-icon>
-                                </v-avatar>
-                            </v-flex>
+                        <div v-for="comment in r.comments">
+                            <v-layout align-center row spacer >
+                                <v-flex xs4 sm2 md1>
+                                    <v-avatar>
+                                        <v-icon class="ml-4" size="40" :color="getColor()">account_circle</v-icon>
+                                    </v-avatar>
+                                </v-flex>
 
-                            <v-flex sm5 md3 hidden-xs-only>
-                                <strong class="mr-5 ml-2">Anonymous User</strong>
-                            </v-flex>
+                                <v-flex sm5 md3 hidden-xs-only>
+                                    <strong class="mr-5 ml-2">{{ comment.user }}</strong>
+                                </v-flex>
 
-                            <v-flex>
-                                <v-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </v-card-text>
-                            </v-flex>
+                                <v-flex>
+                                    <v-card-text>
+                                        {{ comment.comment }}
+                                    </v-card-text>
+                                </v-flex>
+                            </v-layout>
                             <v-divider></v-divider>
-                        </v-layout>
-                        <v-divider></v-divider>
-                        <v-layout align-center row spacer>
-                            <v-flex xs4 sm2 md1>
-                                <v-avatar>
-                                    <v-icon class="ml-4" size="40">account_circle</v-icon>
-                                </v-avatar>
-                            </v-flex>
-
-                            <v-flex sm5 md3 hidden-xs-only>
-                                <strong class="mr-5 ml-2">Anonymous User</strong>
-                            </v-flex>
-
-                            <v-flex>
-                                <v-card-text>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </v-card-text>
-                            </v-flex>
-                            <v-divider></v-divider>
-                        </v-layout>
-
+                        </div>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-card>
@@ -173,7 +153,9 @@
                 img: '',
                 active: null,
                 dialog: false,
-                shareDialog: false
+                shareDialog: false,
+                username: '',
+                comment: ''
             }
         },
         methods: {
@@ -227,6 +209,47 @@
             },
             share(id) {
                 return 'localhost:8080/recipe/' + id;
+            },
+            addComment(recipe, username, comment) {
+                // Reset v-model
+                this.username = '';
+                this.comment = '';
+
+                // Default username should be Anonymous User if a username is not provided
+                if (username === '') {
+                    username = 'Anonymous User'
+                }
+
+                let comments = [];
+
+                // Add the new comment to an array
+                comments.push({
+                    user: username,
+                    comment: comment
+                });
+
+                // Add all existing comments into the array
+                for (let i = 0; i < recipe.comments.length; i++){
+                    comments.push({
+                        user: recipe.comments[i].user,
+                        comment: recipe.comments[i].comment
+                    })
+                }
+
+                // Update the database with the old comments concatenated with the new comment
+                database.collection('recipes').doc(this.$route.params.id).set({
+                    comments: comments
+                }, {merge: true})
+
+            },
+            getColor() {
+                let colors = ['red', 'pink', 'purple', 'indigo', 'deep-purple',
+                              'blue', 'light-blue', 'cyan', 'teal', 'green',
+                              'light-green', 'lime', 'yellow', 'amber', 'orange',
+                              'deep-orange', 'brown', 'blue-grey', 'grey', 'black'];
+                let color = colors[Math.floor(Math.random() * colors.length)];
+                console.log(color);
+                return color;
             }
         }
     }

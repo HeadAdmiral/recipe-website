@@ -48,9 +48,7 @@
                         half-increments
                         small
                         hover
-                        :click="updateRating(recipe.id, rating, recipe.ratingCount, recipe.ratingScore)"
-                        :created.once="setRating(recipe.rating)"
-                ></v-rating>
+                ></v-rating> <!--:click="updateRating(recipe.id, rating, recipe.ratingCount, recipe.ratingScore)" :created.once="setRating(recipe.rating)"-->
               </div>
             </v-card-actions>
           </v-card>
@@ -89,7 +87,7 @@
           getProjects: function() {
               let docs = [];
               // Query database for projects collection
-              database.collection('recipes').get()
+              database.collection('recipes').orderBy("id", "desc").get()
                   .then(function(querySnapshot) {
                       querySnapshot.forEach(function(doc) {
                           // Update the stored ID to match the document's ID

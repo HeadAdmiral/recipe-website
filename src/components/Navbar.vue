@@ -21,7 +21,7 @@
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>
-                        <v-tooltip bottom open-delay="50">
+                        <v-tooltip bottom open-delay="25">
                             <v-icon class="secondary--text" slot="activator">{{ link.icon }}</v-icon>
                             <span>{{ link.text }}</span>
                         </v-tooltip>
@@ -40,8 +40,6 @@
                 drawer: false,
                 links: [
                     { icon: 'home', text: 'Home', route: '/' },
-                    { icon: 'code', text: 'Projects', route: '/projects' },
-                    { icon: 'accessible', text: 'About', route: '/about'}
                 ]
             }
         },
@@ -57,7 +55,7 @@
             query: function() {
                 // If search bar has text, then route to search page
                 if (this.getKeyword() !== "") {
-                    this.$router.push('search' + '?query=' + this.getKeyword());
+                    this.$router.push('search' + '?query=' + this.getKeyword(), this.$router.go());
                 }
             }
         }
