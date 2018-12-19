@@ -14,11 +14,32 @@
               <v-card-text>{{ recipe.summary }}</v-card-text>
             </v-card>
             <v-card-actions>
-              <v-btn flat @click=''>Share</v-btn>
+              <v-btn flat @click='dialog = true'>Share</v-btn>
+              <v-dialog
+                v-model="dialog"
+                max-width="300"
+              >
+                <v-card>
+                  <v-card-title class="headline">
+                    Share Recipe
+                  </v-card-title>
+                  <v-card-text>
+                    Copy the link below to share with friends:
+                  </v-card-text>
+                  <v-layout align-center justify-center fill-height>
+                    <v-flex md11>
+                      <v-text-field solo color="accent" :value="share(recipe.id)"></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                  <v-divider></v-divider>
+                  <v-btn flat @click='dialog = false' color="accent">Close</v-btn>
+                </v-card>
+              </v-dialog>
+
               <v-btn flat @click="view(recipe.id)" color="accent">View</v-btn>
               <v-spacer></v-spacer>
               <span class="grey--text text--darken-2 caption mr-2" id="rating">({{ rating }})</span>
-              <div class="text-xs-center" @click.prevent>
+              <div class="text-xs-center">
                 <v-rating
                         v-model="rating"
                         color="yellow darken-3"
@@ -57,7 +78,8 @@
               edit: {
                   allow: false,
                   route: '/newrecipe'
-              }
+              },
+              dialog: false
           }
       },
       methods: {
@@ -82,28 +104,21 @@
               }
           },
           updateRating(id, rating, count, score) {
-              console.log("=====");
-              console.log(id);
-              console.log("Current Rating: " + rating);
-              console.log("Current Count: " + count);
-              console.log("Current Score: " + score);
-              console.log("-----");
               // If the id is loaded update the recipe rating
-              if (id && rating !== 0) {
+              if (id) {
                   count += 1;
                   score = score + rating;
-                  console.log("New Count: " + count);
-                  console.log("New Score: " + score);
                   rating = Number((score / count).toPrecision(3));
-                  console.log("New rating: " + rating);
-                  console.log("=====");
                   database.collection('recipes').doc(id).set({
                       rating: rating,
                       ratingCount: count,
                       ratingScore: score
                   }, { merge: true }).then(function () {
                       document.getElementById("rating").innerText = '(' + rating +')';
-                      console.log('Rating successfully updated.');
+                      console.log('Rating successfully updated with values:' );
+                      console.log('Rating: ' + rating);
+                      console.log('Rating Count: ' + count);
+                      console.log('Rating Score: ' + score);
                   })
                       .catch(function (error) {
                           console.error('Error adding document: ', error);
@@ -113,6 +128,9 @@
           },
           setRating(rating) {
               this.rating = rating;
+          },
+          share(id) {
+              return 'localhost:8080/recipe/' + id;
           }
       }
   }

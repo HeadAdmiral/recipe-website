@@ -1,8 +1,8 @@
 <template>
     <v-layout align-center justify-center column fill-height>
         <v-flex my-3>
-            <v-card width="1250">
-                <v-img :src="recipe.src" aspect-ratio="2.75" :position=recipe.position></v-img>
+            <v-card width="1250" v-for="r in recipe" :key="r.id">
+                <v-img :src="setup(r.title, r.rating)" aspect-ratio="2.75"></v-img>
                 <v-tabs
                         v-model="active"
                         color="teal"
@@ -18,14 +18,13 @@
                     </v-tab>
 
                     <v-tab-item
-                            v-for="n in [recipe.summary, recipe.ingredients, recipe.directions]"
+                            v-for="n in [r.summary, r.ingredients, r.directions]"
                             :key="n"
                     >
                         <v-card flat>
-                            <v-card-title primary-title v-if="n === recipe.summary">
+                            <v-card-title primary-title v-if="n === r.summary">
                                 <div>
-                                    <h3 class="headline mb-0">{{ recipe.title }}</h3>
-
+                                    <h3 class="headline mb-0">{{ r.title }}</h3>
                                 </div>
                             </v-card-title>
                             <v-card-text>{{ n }}</v-card-text>
@@ -34,9 +33,62 @@
                 </v-tabs>
 
                 <v-card-actions>
-                    <v-btn flat color='accent' @click=''>Share</v-btn>
+                    <v-btn flat color='accent' @click='shareDialog = true'>Share</v-btn>
+                    <v-dialog
+                            v-model="shareDialog"
+                            max-width="300"
+                    >
+                        <v-card>
+                            <v-card-title class="headline">
+                                Share Recipe
+                            </v-card-title>
+                            <v-card-text>
+                                Copy the link below to share with friends:
+                            </v-card-text>
+                            <v-layout align-center justify-center fill-height>
+                                <v-flex md11>
+                                    <v-text-field solo color="accent" :value="share(r.id)"></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                            <v-divider></v-divider>
+                            <v-btn flat @click='shareDialog = false' color="accent">Close</v-btn>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="dialog" width="500">
+                        <v-btn flat color='' slot="activator">Comment</v-btn>
+                        <v-flex>
+                            <v-card>
+                                <v-card-title class="headline grey lighten-4" primary-title>
+                                    Add a Comment
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-text-field
+                                            label="Username"
+                                            color="secondary"
+                                            counter="20"
+                                    ></v-text-field>
+                                    <v-text-field
+                                            label="Comment"
+                                            color="secondary"
+                                            counter="140"
+                                            required
+                                    ></v-text-field>
+                                </v-card-text>
+                                <v-divider></v-divider>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="accent" flat @click="dialog = false">
+                                        Submit
+                                    </v-btn>
+                                    <v-btn flat @click="dialog = false">
+                                        Cancel
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-dialog>
                     <v-spacer></v-spacer>
-                    <span class="grey--text text--darken-2 caption mr-2">({{ rating }})</span>
+                    <span class="grey--text text--darken-2 caption mr-2" id="rating">({{ rating }})</span>
                     <div class="text-xs-center">
                         <v-rating
                                 v-model="rating"
@@ -46,7 +98,10 @@
                                 half-increments
                                 small
                                 hover
-                        ></v-rating> <!-- Store ratings as ratingScore and totalRatings. Recipe rating = ratingScore / totalRatings -->
+                                :click="updateRating(r.id, rating, r.ratingCount, r.ratingScore)"
+                                :created.once="setRating(r.rating)"
+                        ></v-rating>
+                        <!-- Store ratings as ratingScore and totalRatings. Recipe rating = ratingScore / totalRatings -->
                     </div>
                 </v-card-actions>
                 <v-divider></v-divider>
@@ -54,36 +109,49 @@
                     <v-expansion-panel-content>
                         <div slot="header">Comments</div>
                         <v-divider></v-divider>
-                        <v-card>
-                            <v-layout row wrap>
-                                <v-flex xs12 md9>
-                                    <v-text-field
-                                            label="Add a Comment"
-                                            solo
-                                            full-width
-                                            flat
-                                            color="accent"
-                                    ></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md3>
-                                    <v-text-field
-                                            label="Username"
-                                            solo
-                                            flat
-                                            color="secondary"
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
+
+                        <v-layout align-center row spacer>
+                            <v-flex xs4 sm2 md1>
+                                <v-avatar>
+                                    <v-icon class="ml-4" size="40">account_circle</v-icon>
+                                </v-avatar>
+                            </v-flex>
+
+                            <v-flex sm5 md3 hidden-xs-only>
+                                <strong class="mr-5 ml-2">Anonymous User</strong>
+                            </v-flex>
+
+                            <v-flex>
+                                <v-card-text>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </v-card-text>
+                            </v-flex>
                             <v-divider></v-divider>
-                        </v-card>
-                        <v-card>
-                            <v-avatar>
-                                <v-icon></v-icon>
-                            </v-avatar>
-                            <v-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </v-card-text>
-                        </v-card>
+                        </v-layout>
+                        <v-divider></v-divider>
+                        <v-layout align-center row spacer>
+                            <v-flex xs4 sm2 md1>
+                                <v-avatar>
+                                    <v-icon class="ml-4" size="40">account_circle</v-icon>
+                                </v-avatar>
+                            </v-flex>
+
+                            <v-flex sm5 md3 hidden-xs-only>
+                                <strong class="mr-5 ml-2">Anonymous User</strong>
+                            </v-flex>
+
+                            <v-flex>
+                                <v-card-text>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </v-card-text>
+                            </v-flex>
+                            <v-divider></v-divider>
+                        </v-layout>
+
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-card>
@@ -92,36 +160,73 @@
 </template>
 
 <script>
+    import database from '@/components/firebaseInit.js'
     import VTabsSlider from "vuetify/lib/components/VTabs/VTabsSlider";
 
     export default {
         components: {VTabsSlider},
         data() {
-            let recipe = {
-                    title: 'Commission Calculator',
-                    desc: 'Estimates hourly wage for commission-based employees using user-provided sales information.',
-                    src: require('@/img/commission-calculator.jpg'),
-                    position: 'center center',
-                    repo: 'https://github.com/HeadAdmiral/Commission-Calculator',
-                    url: 'https://amastin-microcenter.github.io/Commission-Calculator/',
-                    id: 1,
-                    ratingScore: 1234,
-                    totalRatings: 600,
-                    summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in volutpat sem. Nam posuere pulvinar maximus. Suspendisse potenti. Duis non lorem a velit congue fermentum in id enim. Mauris fringilla congue velit, et maximus lorem rutrum non. Quisque mollis laoreet eros, non cursus ex finibus sit amet. Ut libero ligula, molestie et ultrices nec, placerat ut urna. Praesent maximus sollicitudin tellus, a maximus ligula volutpat at. Aenean ac egestas nibh, id pellentesque lorem. Duis id orci sed ex laoreet semper in ut tellus. Maecenas tincidunt quam vel tellus finibus, quis tempus erat rhoncus. Proin dui elit, malesuada et lobortis nec, lobortis in enim. Vestibulum non magna id odio vestibulum ornare. Donec interdum dignissim congue. Fusce ullamcorper eros nec semper mollis.',
-                    ingredients: 'Ingredients',
-                    directions: 'Directions'
-                };
-            let rating = Number((recipe.ratingScore / recipe.totalRatings).toPrecision(3));
+            let recipe = this.getRecipe();
             return {
                 recipe,
-                rating,
+                rating: 0,
+                img: '',
                 active: null,
-                text: 'test'
+                dialog: false,
+                shareDialog: false
             }
         },
         methods: {
-            share: function() {
-                return 0;
+            getRecipe() {
+                let docs = [];
+                // Query database for projects collection
+                database.collection('recipes').doc(this.$route.params.id).get().then(function (doc) {
+                    if (doc.exists) {
+                        docs.push(doc.data());
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                }).catch(function (error) {
+                    console.log("Error getting document:", error);
+                });
+                return docs;
+            },
+            setup(title, rating) {
+                this.rating = rating;
+
+                if (title !== "") {
+                    return "https://source.unsplash.com/1600x900/?" + title;
+                }
+            },
+            updateRating(id, rating, count, score) {
+                // If the id is loaded update the recipe rating
+                if (id) {
+                    count += 1;
+                    score = score + rating;
+                    rating = Number((score / count).toPrecision(3));
+                    database.collection('recipes').doc(id).set({
+                        rating: rating,
+                        ratingCount: count,
+                        ratingScore: score
+                    }, {merge: true}).then(function () {
+                        document.getElementById("rating").innerText = '(' + rating + ')';
+                        console.log('Rating successfully updated with values:');
+                        console.log('Rating: ' + rating);
+                        console.log('Rating Count: ' + count);
+                        console.log('Rating Score: ' + score);
+                    })
+                        .catch(function (error) {
+                            console.error('Error adding document: ', error);
+                            alert('An error has occurred while attempting to update the rating for document ' + id + '.')
+                        });
+                }
+            },
+            setRating(rating) {
+                this.rating = rating;
+            },
+            share(id) {
+                return 'localhost:8080/recipe/' + id;
             }
         }
     }

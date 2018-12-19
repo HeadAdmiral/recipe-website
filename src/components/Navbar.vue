@@ -17,7 +17,7 @@
             <v-spacer></v-spacer>
         </v-toolbar>
 
-        <v-navigation-drawer v-model="drawer" mini-variant clipped app class="white lighten--4">
+        <v-navigation-drawer absolute v-model="drawer" mini-variant clipped app class="white lighten--4">
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>
