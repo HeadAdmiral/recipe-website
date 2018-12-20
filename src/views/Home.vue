@@ -87,6 +87,10 @@
           }
       },
       methods: {
+          /**
+           * Reroutes the current page to view the given recipe.
+           * e.g. If id = 1234567890, routes to /recipe/1234567890
+           */
           view: function(id) {
               this.$router.push('recipe' + '/' + id);
           },
