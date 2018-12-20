@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <v-toolbar app absolute clipped-left class="primary">
+        <v-toolbar app fixed clipped-left class="primary">
             <v-toolbar-side-icon style="color: #424242" @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>
                 <span class="mr-5">{{ this.$route.name }}</span>
@@ -17,7 +17,7 @@
             <v-spacer></v-spacer>
         </v-toolbar>
 
-        <v-navigation-drawer absolute v-model="drawer" mini-variant clipped app class="white lighten--4">
+        <v-navigation-drawer fixed v-model="drawer" mini-variant clipped app class="white lighten--4">
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>

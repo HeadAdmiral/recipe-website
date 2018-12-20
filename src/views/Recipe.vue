@@ -178,6 +178,7 @@
                 this.rating = rating;
 
                 if (title !== "") {
+                    title = title.replace(" ", "%20");
                     return "https://source.unsplash.com/1600x900/?" + title;
                 }
             },
@@ -193,10 +194,6 @@
                         ratingScore: score
                     }, {merge: true}).then(function () {
                         document.getElementById("rating").innerText = '(' + rating + ')';
-                        console.log('Rating successfully updated with values:');
-                        console.log('Rating: ' + rating);
-                        console.log('Rating Count: ' + count);
-                        console.log('Rating Score: ' + score);
                     })
                         .catch(function (error) {
                             console.error('Error adding document: ', error);
@@ -248,7 +245,6 @@
                               'light-green', 'lime', 'yellow', 'amber', 'orange',
                               'deep-orange', 'brown', 'blue-grey', 'grey', 'black'];
                 let color = colors[Math.floor(Math.random() * colors.length)];
-                console.log(color);
                 return color;
             }
         }
