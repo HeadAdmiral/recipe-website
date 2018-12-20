@@ -31,8 +31,17 @@ The home page for recipe.ly.
 
 - `view(id)` 
 
+  Reroutes the current page to view the given recipe.
+  e.g. If id = 1234567890, routes to /recipe/1234567890 
+
 - `getProjects()` 
 
+  Queries Firebase for the 'recipes' collection and orders by id.
+  Returns query as an array of objects. 
+
+   **return value:** 
+
+     - **Any** - {Array} 
 - `getIMG(val)` 
 
 - `updateRating(id, rating, count, score)` 
