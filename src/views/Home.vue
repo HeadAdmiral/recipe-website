@@ -121,7 +121,12 @@
                   return "https://source.unsplash.com/1600x900/?" + val;
               }
           },
-
+          /**
+           * Updates the recipe's rating value in Firebase when clicked.
+           * Rating is calculated with two variables -- score and count.
+           * Score is the sum of all ratings, and count is the total number of ratings.
+           * A recipe's rating is equal to score divided by count and rounded to 3 decimal places.
+           */
           updateRating(id, rating, count, score) {
               // If the id is loaded update the recipe rating
               if (id) {
@@ -145,11 +150,16 @@
                       });
               }
           },
-
+          /**
+           * Sets the v-model 'rating' to the given value.
+           */
           setRating(rating) {
               this.rating = rating;
           },
-
+          /**
+           * Provides a share URL for the v-text-field in the 'shareDialog' window.
+           * @returns {string}
+           */
           share(id) {
               return 'localhost:8080/recipe/' + id;
           }

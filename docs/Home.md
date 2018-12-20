@@ -52,7 +52,19 @@ The home page for recipe.ly.
      - **Any** - {string} 
 - `updateRating(id, rating, count, score)` 
 
+  Updates the recipe's rating value in Firebase when clicked.
+  Rating is calculated with two variables -- score and count.
+  Score is the sum of all ratings, and count is the total number of ratings.
+  A recipe's rating is equal to score divided by count and rounded to 3 decimal places. 
+
 - `setRating(rating)` 
+
+  Sets the v-model 'rating' to the given value. 
 
 - `share(id)` 
 
+  Provides a share URL for the v-text-field in the 'shareDialog' window. 
+
+   **return value:** 
+
+     - **Any** - {string} 
