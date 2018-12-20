@@ -88,12 +88,17 @@
       },
       methods: {
           /**
-           * Reroutes the current page to view the given recipe.
-           * e.g. If id = 1234567890, routes to /recipe/1234567890
+           *
+           *
            */
           view: function(id) {
               this.$router.push('recipe' + '/' + id);
           },
+          /**
+           * Queries Firebase for the 'recipes' collection and orders by id.
+           * Returns query as an array of objects.
+           * @returns {Array}
+           */
           getProjects: function() {
               let docs = [];
               // Query database for projects collection
