@@ -62,6 +62,12 @@
 </template>
 
 <script>
+  /**
+   * The home page for recipe.ly.
+   *
+   * @author Alex Mastin
+   * @license MIT
+   */
   import database from '@/components/firebaseInit.js'
   export default {
       data() {

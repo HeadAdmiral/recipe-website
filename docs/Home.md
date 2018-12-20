@@ -1,5 +1,10 @@
 # home 
 
+The home page for recipe.ly. 
+
+- **author** - Alex Mastin 
+- **license** - MIT 
+
 ## data 
 
 - `recipes` 
