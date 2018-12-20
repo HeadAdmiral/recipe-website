@@ -54,9 +54,24 @@
 
 - `getIMG(val)` 
 
+  Returns a matching random image from the Unsplash API using the given value.
+  If no title is provided this method does nothing. 
+
+   **return value:** 
+
+     - **Any** - {string} 
 - `submit()` 
+
+  Validates input from the form, and then creates a document with id equal to milliseconds since epoch. 
 
 - `clear()` 
 
+  Clears each field inside of the form. 
+
 - `getID()` 
 
+  Returns number of milliseconds since epoch. 
+
+   **return value:** 
+
+     - **Any** - {string} 
