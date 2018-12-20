@@ -111,11 +111,17 @@
                   });
               return docs;
           },
+          /**
+           * Returns a matching random image from the Unsplash API using the given value.
+           * If no title is provided this method does nothing.
+           * @returns {string}
+           */
           getIMG(val) {
               if (val !== "") {
                   return "https://source.unsplash.com/1600x900/?" + val;
               }
           },
+
           updateRating(id, rating, count, score) {
               // If the id is loaded update the recipe rating
               if (id) {
@@ -139,9 +145,11 @@
                       });
               }
           },
+
           setRating(rating) {
               this.rating = rating;
           },
+
           share(id) {
               return 'localhost:8080/recipe/' + id;
           }

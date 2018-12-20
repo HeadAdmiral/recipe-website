@@ -44,6 +44,12 @@ The home page for recipe.ly.
      - **Any** - {Array} 
 - `getIMG(val)` 
 
+  Returns a matching random image from the Unsplash API using the given value.
+  If no title is provided this method does nothing. 
+
+   **return value:** 
+
+     - **Any** - {string} 
 - `updateRating(id, rating, count, score)` 
 
 - `setRating(rating)` 

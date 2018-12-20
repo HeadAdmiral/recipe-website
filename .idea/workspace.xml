@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64e1c233-825d-4f23-a838-b58e04a9f865" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/docs/Home.md" afterPath="$PROJECT_DIR$/docs/Home.md" />
       <change beforePath="$PROJECT_DIR$/src/views/Home.vue" afterPath="$PROJECT_DIR$/src/views/Home.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,8 +21,8 @@
       <file leaf-file-name="Home.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/Home.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="89" column="13" lean-forward="true" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+            <state relative-caret-position="1037">
+              <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -29,7 +31,7 @@
       <file leaf-file-name="Navbar.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Navbar.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="1749">
               <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
               <folding />
             </state>
@@ -49,7 +51,7 @@
       <file leaf-file-name="Recipe.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/Recipe.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2275">
+            <state relative-caret-position="6402">
               <caret line="195" column="89" lean-forward="false" selection-start-line="195" selection-start-column="89" selection-end-line="195" selection-end-column="89" />
               <folding />
             </state>
@@ -150,11 +152,10 @@
       <path value="$PROJECT_DIR$/vue-material/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-13" />
-    <option name="y" value="-13" />
-    <option name="width" value="3226" />
-    <option name="height" value="1746" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1589" />
+    <option name="width" value="1622" />
+    <option name="height" value="1731" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -171,8 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,6 +222,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,18 +288,19 @@
       <workItem from="1544816908767" duration="72000" />
       <workItem from="1545142036400" duration="5026000" />
       <workItem from="1545262758340" duration="10000" />
-      <workItem from="1545332057925" duration="3012000" />
+      <workItem from="1545332057925" duration="3900000" />
+      <workItem from="1545342876527" duration="225000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73785000" />
+    <option name="totallyTimeSpent" value="74898000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="-13" width="3226" height="1746" extended-state="6" />
+    <frame x="1589" y="0" width="1622" height="1731" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5012531" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -577,7 +579,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Navbar.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
+        <state relative-caret-position="1749">
           <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
           <folding />
         </state>
@@ -585,7 +587,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Recipe.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2275">
+        <state relative-caret-position="6402">
           <caret line="195" column="89" lean-forward="false" selection-start-line="195" selection-start-column="89" selection-end-line="195" selection-end-column="89" />
           <folding />
         </state>
@@ -593,8 +595,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Home.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="89" column="13" lean-forward="true" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+        <state relative-caret-position="1037">
+          <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
           <folding />
         </state>
       </provider>
