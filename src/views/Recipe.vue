@@ -159,6 +159,11 @@
             }
         },
         methods: {
+            /**
+             * Queries Firebase for a document with id matching `this.$route.params.id` in the 'recipes' collection .
+             * Returns query as an array of objects.
+             * @returns {Array}
+             */
             getRecipe() {
                 let docs = [];
                 // Query database for projects collection
@@ -174,6 +179,13 @@
                 });
                 return docs;
             },
+            /**
+             * Sets the v-model 'rating' to the given value.
+             *
+             * Returns a matching random image from the Unsplash API using the given value.
+             * If no title is provided this method does nothing.
+             * @returns {string}
+             */
             setup(title, rating) {
                 this.rating = rating;
 
@@ -182,6 +194,12 @@
                     return "https://source.unsplash.com/1600x900/?" + title;
                 }
             },
+            /**
+             * Updates the recipe's rating value in Firebase when clicked.
+             * Rating is calculated with two variables -- score and count.
+             * Score is the sum of all ratings, and count is the total number of ratings.
+             * A recipe's rating is equal to score divided by count and rounded to 3 decimal places.
+             */
             updateRating(id, rating, count, score) {
                 // If the id is loaded update the recipe rating
                 if (id) {
@@ -201,12 +219,23 @@
                         });
                 }
             },
+            /**
+             * Sets the v-model 'rating' to the given value.
+             */
             setRating(rating) {
                 this.rating = rating;
             },
+            /**
+             * Provides a share URL for the v-text-field in the 'shareDialog' window.
+             * @returns {string}
+             */
             share(id) {
                 return 'localhost:8080/recipe/' + id;
             },
+            /**
+             * Concatenates the username and comment as a JSON object to the existing comments from the Firebase query.
+             * The resultant array of JSON objects is then updated in the database.
+             */
             addComment(recipe, username, comment) {
                 // Reset v-model
                 this.username = '';
@@ -239,6 +268,11 @@
                 }, {merge: true})
 
             },
+            /**
+             * Returns a random color from an array of colors.
+             * Used to provide a random color for 'v-avatar' icons.
+             * @returns {string}
+             */
             getColor() {
                 let colors = ['red', 'pink', 'purple', 'indigo', 'deep-purple',
                               'blue', 'light-blue', 'cyan', 'teal', 'green',

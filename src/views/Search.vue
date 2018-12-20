@@ -81,6 +81,11 @@
             }
         },
         methods: {
+            /**
+             * Queries Firebase for the 'recipes' collection where a recipe's title matches the search key word.
+             * Returns query as an array of objects.
+             * @returns {Array}
+             */
             search() {
                 let docs = [];
                 database.collection('recipes').where("title", ">=", this.$route.query.query).get()
@@ -92,14 +97,28 @@
                     });
                 return docs;
             },
+            /**
+             * Returns a matching random image from the Unsplash API using the given value.
+             * If no title is provided this method does nothing.
+             * @returns {string}
+             */
             getIMG(val) {
                 if (val !== "") {
                     return "https://source.unsplash.com/1600x900/?" + val;
                 }
             },
+            /**
+             * Provides a share URL for the v-text-field in the 'shareDialog' window.
+             * @returns {string}
+             */
             share(id) {
                 return 'localhost:8080/recipe/' + id;
             },
+            /**
+             * Returns true if there are no elements with a class of 'card' on the page.
+             * i.e. Returns true if there are no matching search results.
+             * @returns {boolean}
+             */
             isEmpty: function() {
                 if (document.getElementsByClassName("card").length === 0) {
                     return true;
@@ -109,6 +128,9 @@
                 }
             }
 
+        },
+        updated() {
+            this.empty = this.isEmpty();
         }
     }
 </script>

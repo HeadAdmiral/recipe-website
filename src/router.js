@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import NewRecipe from './views/NewRecipe.vue'
-import About from './views/About.vue'
 import Search from './views/Search.vue'
 import Recipe from './views/Recipe.vue'
 
@@ -22,11 +21,6 @@ export default new Router({
             path: '/newrecipe',
             name: 'New Recipe',
             component: NewRecipe
-        },
-        {
-            path: '/about',
-            name: 'About',
-            component: About
         },
         {
             path: '/search',

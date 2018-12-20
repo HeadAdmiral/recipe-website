@@ -43,15 +43,17 @@
                 ]
             }
         },
-        firestore () {
-            return {
-                // search: db.collection
-            }
-        },
         methods: {
+            /**
+             * Returns any characters that have been entered into the search bar.
+             * @returns {string}
+             */
             getKeyword: function() {
                 return document.getElementById("search").value;
             },
+            /**
+             * Reroutes the current page to /search and reloads the page to trigger a database query.
+             */
             query: function() {
                 // If search bar has text, then route to search page
                 if (this.getKeyword() !== "") {

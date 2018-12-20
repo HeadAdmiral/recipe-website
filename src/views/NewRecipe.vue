@@ -116,11 +116,19 @@
         }),
 
         methods: {
+            /**
+             * Returns a matching random image from the Unsplash API using the given value.
+             * If no title is provided this method does nothing.
+             * @returns {string}
+             */
             getIMG(val) {
                 if (val !== "") {
                     this.img = "https://source.unsplash.com/1600x900/?" + val;
                 }
             },
+            /**
+             * Validates input from the form, and then creates a document with id equal to milliseconds since epoch.
+             */
             submit: function () {
                 let docID = this.getID();
                 if (this.$refs.form.validate()) {
@@ -133,12 +141,7 @@
                         ratingScore: 0,
                         ratingCount: 0,
                         rating: 0,
-                        comments: [
-                            {
-                                user: 'John Doe',
-                                comment: 'Hello World!'
-                            }
-                        ]
+                        comments: []
                     })
                         .then(function() {
                             console.log('Document successfully written');
@@ -150,9 +153,16 @@
                     this.clear();
                 }
             },
+            /**
+             * Clears each field inside of the form.
+             */
             clear: function () {
                 this.$refs.form.reset();
             },
+            /**
+             * Returns number of milliseconds since epoch.
+             * @returns {string}
+             */
             getID: function() {
                 return String(new Date().getTime())
             }
