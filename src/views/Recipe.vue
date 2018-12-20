@@ -220,13 +220,13 @@
                 }
             },
             /**
-             * Sets the v-model 'rating' to the given value.
+             * Sets the `v-model` 'rating' to the given value.
              */
             setRating(rating) {
                 this.rating = rating;
             },
             /**
-             * Provides a share URL for the v-text-field in the 'shareDialog' window.
+             * Provides a share URL for the `v-text-field` in the 'shareDialog' window.
              * @returns {string}
              */
             share(id) {
@@ -270,7 +270,7 @@
             },
             /**
              * Returns a random color from an array of colors.
-             * Used to provide a random color for 'v-avatar' icons.
+             * Used to provide a random color for `v-avatar` icons.
              * @returns {string}
              */
             getColor() {

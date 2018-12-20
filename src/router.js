@@ -8,6 +8,11 @@ import Recipe from './views/Recipe.vue'
 
 Vue.use(Router)
 
+/**
+ * Defines routes for the Router.
+ * Each route has a `path`, `name`, and `component`.
+ */
+
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,

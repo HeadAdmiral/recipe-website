@@ -9,7 +9,11 @@
 
 <script>
     import Navbar from '@/components/Navbar'
-    
+
+    /**
+     * Defines the main application component.
+     * Any components that are used throughout the app, such as `Navbar` are imported here.
+     */
     export default {
         name: 'App',
         components: {Navbar},

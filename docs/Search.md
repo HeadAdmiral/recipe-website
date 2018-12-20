@@ -38,14 +38,14 @@
      - **Any** - {string} 
 - `share(id)` 
 
-  Provides a share URL for the v-text-field in the 'shareDialog' window. 
+  Provides a share URL for the `v-text-field` in the 'shareDialog' window. 
 
    **return value:** 
 
      - **Any** - {string} 
 - `isEmpty()` 
 
-  Returns true if there are no elements with a class of 'card' on the page.
+  Returns true if there are no elements with a class of `card` on the page.
   i.e. Returns true if there are no matching search results. 
 
    **return value:** 

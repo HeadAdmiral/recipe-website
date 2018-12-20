@@ -108,14 +108,14 @@
                 }
             },
             /**
-             * Provides a share URL for the v-text-field in the 'shareDialog' window.
+             * Provides a share URL for the `v-text-field` in the 'shareDialog' window.
              * @returns {string}
              */
             share(id) {
                 return 'localhost:8080/recipe/' + id;
             },
             /**
-             * Returns true if there are no elements with a class of 'card' on the page.
+             * Returns true if there are no elements with a class of `card` on the page.
              * i.e. Returns true if there are no matching search results.
              * @returns {boolean}
              */

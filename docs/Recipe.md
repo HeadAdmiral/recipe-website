@@ -63,11 +63,11 @@
 
 - `setRating(rating)` 
 
-  Sets the v-model 'rating' to the given value. 
+  Sets the `v-model` 'rating' to the given value. 
 
 - `share(id)` 
 
-  Provides a share URL for the v-text-field in the 'shareDialog' window. 
+  Provides a share URL for the `v-text-field` in the 'shareDialog' window. 
 
    **return value:** 
 
@@ -80,7 +80,7 @@
 - `getColor()` 
 
   Returns a random color from an array of colors.
-  Used to provide a random color for 'v-avatar' icons. 
+  Used to provide a random color for `v-avatar` icons. 
 
    **return value:** 
 

@@ -89,7 +89,7 @@
       methods: {
           /**
            * Reroutes the current page to view the given recipe.
-           * e.g. If id = 1234567890, routes to /recipe/1234567890
+           * e.g. If `id = 1234567890`, routes to `/recipe/1234567890`
            */
           view: function(id) {
               this.$router.push('recipe' + '/' + id);
@@ -151,13 +151,13 @@
               }
           },
           /**
-           * Sets the v-model 'rating' to the given value.
+           * Sets the `v-model` 'rating' to the given value.
            */
           setRating(rating) {
               this.rating = rating;
           },
           /**
-           * Provides a share URL for the v-text-field in the 'shareDialog' window.
+           * Provides a share URL for the `v-text-field` in the 'shareDialog' window.
            * @returns {string}
            */
           share(id) {

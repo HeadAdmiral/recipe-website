@@ -7,6 +7,9 @@ import 'firebase/firestore'
 
 Vue.config.productionTip = false;
 
+/**
+ * Creates the Vue instance
+ */
 new Vue({
     router,
     render: h => h(App)

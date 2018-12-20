@@ -32,7 +32,7 @@ The home page for recipe.ly.
 - `view(id)` 
 
   Reroutes the current page to view the given recipe.
-  e.g. If id = 1234567890, routes to /recipe/1234567890 
+  e.g. If `id = 1234567890`, routes to `/recipe/1234567890` 
 
 - `getProjects()` 
 
@@ -59,11 +59,11 @@ The home page for recipe.ly.
 
 - `setRating(rating)` 
 
-  Sets the v-model 'rating' to the given value. 
+  Sets the `v-model` 'rating' to the given value. 
 
 - `share(id)` 
 
-  Provides a share URL for the v-text-field in the 'shareDialog' window. 
+  Provides a share URL for the `v-text-field` in the 'shareDialog' window. 
 
    **return value:** 
 
